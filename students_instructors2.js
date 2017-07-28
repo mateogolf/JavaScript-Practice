@@ -11,15 +11,15 @@ var students = [
      {first_name : 'John', last_name : 'Rosales'},
      {first_name : 'Mark', last_name : 'Guillen'},
      {first_name : 'KB', last_name : 'Tonel'}
-];
+]
 
 printNames(students);
 
 function printUsers(obj={}){
     for(var key in obj){
         console.log(key);
-        var arr = obj[key];
-        printNames(arr);
+        // var arr = obj[key];
+        printNames(obj[key]);
     }
 }
 
@@ -35,4 +35,5 @@ var users = {
      {first_name : 'Martin', last_name : 'Puryear'}
   ]
  }
+
 printUsers(users);

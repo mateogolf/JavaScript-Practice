@@ -8,5 +8,5 @@ function numbersOnly(arr){
     return result;
 }
 var newArray = numbersOnly([1, "apple", -3, "orange", 0.5]);
-
 console.log(newArray);
+
