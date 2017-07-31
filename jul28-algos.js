@@ -53,7 +53,7 @@ function playStatistics4(num){
     }
     console.log("MIN: " + min);
     console.log("MAX: " + max);
-    console.log("AVG: "+sum/num);
+    console.log("AVG: "+ sum/num);
 }
 
 console.log(rollOne());
