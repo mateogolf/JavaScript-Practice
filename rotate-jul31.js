@@ -15,10 +15,18 @@ function rotateArr(arr,shiftBy){
     }
     return arr;
 }
+function rotateArr2(arr,shiftBy){
+    if(shiftBy> arr.length || shiftBy < 0 || arr.length == 0){
+        console.log("You input was flawed.  No change to array.");
+        return arr;
+    }
+    //Create array with numbers shifted
+    // v
+}
 
 var testArr = [3,5,2,8,1,"ten"];
 
 console.log(rotateArr(testArr,3));
 console.log(rotateArr(testArr,2));
 // console.log(rotateArr(testArr,10));
-console.log(rotateArr([],0));
+console.log(rotateArr([],-1));
