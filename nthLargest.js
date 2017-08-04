@@ -5,7 +5,6 @@ function drift(arr,idx){
         arr.pop();
         return arr
     }
-
 function nthlargest(arr, n){
   var newarr = [];
   var max = arr[arr.length-1];
