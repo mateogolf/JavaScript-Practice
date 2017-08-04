@@ -5,9 +5,8 @@ function intersums(arr){
         count ++;
         sum += arr[i];
         if (count == 10){
-            arr.length ++;
-            for(let j = arr.length-2; j >i; j--){
-                arr[j+1] = arr[j];
+            for(let j = arr.length; j >i; j--){
+                arr[j] = arr[j-1];
             }
             arr[i +1] = sum;
             sum = 0;
@@ -22,4 +21,3 @@ function intersums(arr){
 }
 
 console.log(intersums([1,2,1,2,1,2,1,2,1,2,1,2,1,2]))
-
