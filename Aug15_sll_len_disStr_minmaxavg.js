@@ -9,7 +9,7 @@ function SLL() {
     this.insert = function (value) {
         if (!this.head) { //Adds to beginning if nothing in list
             this.head = new Node(value);
-            return this.head;
+            return this;
         }
         //Traversal
         var current = this.head;
@@ -17,13 +17,13 @@ function SLL() {
             current = current.next;
         }
         current.next = new Node(value);
-        return this.head;
+        return this;
     }
     this.addFront = function (value) {
         var newNode = new Node(value);
         newNode.next = this.head;
         this.head = newNode;
-        return this.head;
+        return this;
     }
     this.contains = function (value) {
         var current = this.head;
@@ -52,7 +52,7 @@ function SLL() {
             current = current.next;
         }
         return result;
-    }
+    }//returns string
     this.minMaxAvg = function() {
         if(!this.head){return "Empty list"}
         var min = this.head.val;
@@ -71,7 +71,7 @@ function SLL() {
         }
         var avg = sum/this.count() //avg
         return [min,max,avg];
-    }
+    }//returns string when empty or array [min,max,avg]
     this.min = function () {
         if (!this.head) { return "Empty list" }
         var min = this.head.val;
@@ -83,7 +83,7 @@ function SLL() {
             current = current.next;//iterate
         }
         return min;
-    }
+    }//return str if empty or min
     this.max = function () {
         if (!this.head) { return "Empty list" }
         var max = this.head.val;
@@ -95,8 +95,8 @@ function SLL() {
             current = current.next;//iterate
         }
         return max;
-    }
-    this.minMaxAvg = function () {
+    }//return str if empty or max
+    this.avg = function () {
         if (!this.head) { return "Empty list" }
         var sum = this.head.val;
         var current = this.head.next;
@@ -106,7 +106,7 @@ function SLL() {
         }
         var avg = sum / this.count() //avg
         return avg;
-    }
+    }//return str if empty or avg
     //removing an item in the list - assuming there is only one node with that value
     // this.removeNode = function (value) {
     //     //find node's value
