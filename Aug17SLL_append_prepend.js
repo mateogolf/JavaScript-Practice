@@ -1,11 +1,12 @@
 function Node(val) {
     this.val = val;
-    this.null = null;
+    this.next = null;
 }
 
-function SLL() {
+function SLL(head=null) {
     //attributes of SLL class
-    this.null
+    this.head = head;
+
     this.insert = function (value) {
         if (!this.head) { //Adds to beginning if nothing in list
             this.head = new Node(value);
@@ -199,6 +200,11 @@ function SLL() {
         current.next = new Node(value);
     }
     this.printAll = function (){
+        console.log("Linked List");
+        if (!this.head) {
+            console.log("Empty List")
+            return this
+        }//empty list ends
         var current = this.head;
         var count = 1;
         console.log(count, ": ", current.val);
@@ -210,30 +216,21 @@ function SLL() {
         return this;
     }
 }
-function SLL2() {
-    //attributes of SLL class
-    this.null
-    this.insert = function (value) {
-        if (!this.head) { //Adds to beginning if nothing in list
-            this.head = new Node(value);
-            return this;
-        }
-        //Traversal
-        var current = this.head;
-        while (current.next) {
-            current = current.next;
-        }
-        current.next = new Node(value);
-        return this;
-    }
+function SLL2(head=null) {
+    //Inherit of SLL class
+    SLL.call(this,head);
+
+    //methods
     this.append = function(value,after){//add val after "after" variable
         if (!this.head) {
             console.log("Empty List")
             return this
         }//empty list ends
         var current = this.head;
-        while(current.next){
-            if(cuurent.val === after){
+        var found = false
+        while(current){
+            if(current.val === after){
+                found = true;
                 var newNode = new Node(value);
                 newNode.next = current.next;
                 current.next = newNode;
@@ -243,25 +240,48 @@ function SLL2() {
                 current = current.next;//iteration-regular
             }
         }
+        if(!found){
+            current.next = new Node(value);
+        }
         return this
+    }
+    this.prepend = function(value,before){//add val before "before" variable
+        if (!this.head) {
+            console.log("Empty List")
+            return this
+        }//empty list ends
+        var found = false;
+        if(this.head.val === before){
+            found = true;
+            var newNode = new Node(value);
+            newNode.next = this.head;
+            this.head = newNode;
+            var current = newNode.next;
+        }//value is first
+        else{
+            var current = this.head;
+            var found = false;
+        }        
+        while(current.next){
+            if(current.next.val === before){
+                found = true
+                var newNode = new Node(value);
+                newNode.next = current.next;
+                current.next = newNode;
+                current = newNode.next;
+                // previous = current.next;
+            }
+            else{current = current.next;}
+        }
+        if (!found) {
+            console.log("value added to end b/c second parameter not found")
+            current.next = new Node(value);
+        }
     }
 }
 
-var sL1 = new SLL();
-sL1.insert(0);
-sL1.insert(5);
-sL1.insert(6);
-// sL1.printAll();
-// console.log(sL1.findBack());
-// sL1.removeBack();
-// sL1.printAll();
-// sL1.removeBack();
-// sL1.printAll();
-// sL1.minToFront();
-sL1.maxToBack();
-sL1.printAll();
-// sL1.addBack(5);
-// sL1.addBack(6);
-// sL1.printAll();
-// sL1.head.next = null;
-// sL1.printAll();
+var sL1 = new SLL2();
+sL1.insert(0).insert(5).insert(6)
+// sL1.printAll()
+sL1.prepend(2,10)
+sL1.printAll()
