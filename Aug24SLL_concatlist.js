@@ -305,6 +305,14 @@ function SLL2(head = null) {
     
     //methods
     this.concatList = function(newList){
+        if (!newList.head) {
+            console.log("New List is Empty")
+            return this;
+        }//empty new list ends function with no change
+        else if (!this.head) {
+            this.head = newList.head;
+            return this;
+        }//empty original list and new list not empty==>original=new  
         var current = this.head;
         while(current.next){
             current = current.next;
@@ -312,13 +320,34 @@ function SLL2(head = null) {
         current.next = newList.head; 
         return this;
     }
+    this.concatNode = function(newNode) {//Adds node object instead of creating a new node like insert
+        if(newNode instanceof Node){
+            if (!this.head) {
+                this.head = newNode;
+                return this;
+            }//empty list ends
+            var current = this.head;
+            while (current.next) {
+                current = current.next;
+            }
+            current.next = newNode;
+            return this;
+        }
+        else{
+            console.log("parameter not a node")
+            return this;
+        }
+    }
 
 }
 
 var sl1 = new SLL2();
 var sl2 = new SLL2();
+var node1 = new Node(10);
 sl1.insert(-1).insert(2).insert(-3);
 sl1.printAll();
-sl2.insert(6).insert(5).insert(-2);
+// sl2.insert(6).insert(5).insert(-2);
 sl1.concatList(sl2);
+sl1.printAll();
+sl1.concatNode(node1);
 sl1.printAll();
