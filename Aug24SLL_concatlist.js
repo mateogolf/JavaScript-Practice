@@ -320,7 +320,7 @@ function SLL2(head = null) {
         current.next = newList.head; 
         return this;
     }
-    this.concatNode = function(newNode) {//Adds node object instead of creating a new node like insert
+    this.insertNode = function(newNode) {//Adds node object instead of creating a new node like insert
         if(newNode instanceof Node){
             if (!this.head) {
                 this.head = newNode;
