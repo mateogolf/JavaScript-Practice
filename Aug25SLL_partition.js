@@ -344,21 +344,19 @@ function SLL2(head = null) {
         }//empty or 1 node list: do nothing
         var current = this.head;
         var found = this.head;
-        // var foundEnd = false;
-        //find the value
         if (this.head.val == value) {
+            var prev = this.head;
             while (current.next) {
                 if (current.next.val < value) {
                     let lesser = current.next;
                     current.next = lesser.next;
-                    lesser.next = this.head;
-                    this.head = lesser;
+                    lesser.next = prev;
+                    prev = lesser;
                 }
                 else { current = current.next; }
             }
         }
         else {
-            // var prev = this.head;
             while (current.next) {//Look for first node with value
                 if (current.next.val == value) {
                     found = current.next;
@@ -375,8 +373,7 @@ function SLL2(head = null) {
             else if (!found.next) { var foundEnd = true }
             else { var foundEnd = false }
             //compare after found
-            while (current.val != found.val) {//moves nodes w/ vals>value after 
-                // console.log(current.next)
+            while (current.val != found.val) {//moves nodes w/ vals>value after
                 if (current.next.val > value) {
                     if (current.next == prev) {
                         prev = current;
@@ -385,12 +382,8 @@ function SLL2(head = null) {
                     current.next = greater.next;
                     greater.next = found.next;
                     found.next = greater;
-                    // this.printAll()
                 }
-                else { 
-                    current = current.next;
-                    // console.log(current);
-                }
+                else {current = current.next;}
             }//nodes >er moved after value
             if (!foundEnd) {
                 while (current.next) {
@@ -403,7 +396,6 @@ function SLL2(head = null) {
                     else{current = current.next;}
                 }
             }
-            // this.printAll()
         }//if found is not the first node
 
         return this;
@@ -412,9 +404,6 @@ function SLL2(head = null) {
 }
 
 var sl1 = new SLL2();
-// var sl2 = new SLL2();
-// var node1 = new Node(10);
 sl1.insert(-1).insert(2).insert(-3).insert(6).insert(-2).insert(10).insert(5);
-// sl1.printAll();
 sl1.partition(5);
 sl1.printAll();
