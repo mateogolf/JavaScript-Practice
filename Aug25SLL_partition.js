@@ -356,6 +356,7 @@ function SLL2(head = null) {
             }
         }
         else {
+            // var prev = this.head;
             while (current.next) {//Look for first node with value
                 if (current.next.val == value) {
                     found = current.next;
