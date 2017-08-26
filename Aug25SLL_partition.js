@@ -337,80 +337,84 @@ function SLL2(head = null) {
     SLL.call(this, head);
     
     //methods
-    this.partition = function(value){
+    this.partition = function (value) {
         if (!this.head || !this.head.next) {
             console.log("Empty List or too short")
             return this
         }//empty or 1 node list: do nothing
         var current = this.head;
-        var found;
-        var foundEnd = false;
+        var found = this.head;
+        // var foundEnd = false;
         //find the value
-        if(this.head.val == value){
-            found = this.head;
-            var prev = this.head;
-            //Create lesser SLL for nodes with val < found
-            //loop through list and add nodes with value to list before value
+        if (this.head.val == value) {
+            while (current.next) {
+                if (current.next.val < value) {
+                    let lesser = current.next;
+                    current.next = lesser.next;
+                    lesser.next = this.head;
+                    this.head = lesser;
+                }
+                else { current = current.next; }
+            }
         }
-        else{
-            var prev = this.head;
-            // var greaterSLL = new SLL2()
-            // while(this.head.val > value){
-            //     greaterSLL.insert(this.head);
-            //     this.head = this.head.next;
-            // }
-            while(current.next){//Look for first node with value
-                // if (current.next.val > value) {
-                //     greaterSLL.insert(current.next);
-                //     current.next = 
-                // }
-                // else if(current.val.next == value){
-                if (current.val.next == value) {
+        else {
+            // var prev = this.head;
+            while (current.next) {//Look for first node with value
+                if (current.next.val == value) {
                     found = current.next;
-                    prev = current;
-                    current = this.head;
+                    var prev = current;
                     break;
                 }//found node with value, end loop
                 current = current.next;
             }
-            if(!found){
+            current = this.head;
+            if (found === this.head) {
                 console.log("value not in SLL")
                 return this
             }//value not found, return this
-            if(!found.next){foundEnd = true}
+            else if (!found.next) { var foundEnd = true }
+            else { var foundEnd = false }
             //compare after found
-            while(current.val != found){//moves nodes w/ vals>value after 
+            while (current.val != found.val) {//moves nodes w/ vals>value after 
+                // console.log(current.next)
                 if (current.next.val > value) {
+                    if (current.next == prev) {
+                        prev = current;
+                    }
                     let greater = current.next;
                     current.next = greater.next;
                     greater.next = found.next;
                     found.next = greater;
+                    // this.printAll()
                 }
-                else{current = current.next}
+                else { 
+                    current = current.next;
+                    // console.log(current);
+                }
+            }//nodes >er moved after value
+            if (!foundEnd) {
+                while (current.next) {
+                    if (current.next.val < value) {
+                        let lesser = current.next;
+                        current.next = lesser.next;
+                        lesser.next = prev.next;
+                        prev.next = lesser;
+                    }
+                    else{current = current.next;}
+                }
             }
+            // this.printAll()
         }//if found is not the first node
-        if(!foundEnd){
-            while(current.next){
-                if (current.next.val < value) {
-                    let lesser = current.next;
-                    current.next = lesser.next;
-                    lesser.next = found;
-                    prev.next = lesser;
-                }
-            }
-        }
-        return this
+
+        return this;
     }//partition method
 
 }
 
 var sl1 = new SLL2();
-var sl2 = new SLL2();
-var node1 = new Node(10);
-sl1.insert(-1).insert(2).insert(-3);
-sl1.printAll();
-// sl2.insert(6).insert(5).insert(-2);
-sl1.concatList(sl2);
-sl1.printAll();
-sl1.concatNode(node1);
+// var sl2 = new SLL2();
+// var node1 = new Node(10);
+sl1.insert(-1).insert(2).insert(-3).insert(6).insert(-2).insert(10).insert(5);
+// sl1.printAll();
+sl1.partition(5);
 sl1.printAll();
