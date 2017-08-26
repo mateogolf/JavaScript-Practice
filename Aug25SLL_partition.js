@@ -345,13 +345,12 @@ function SLL2(head = null) {
         var current = this.head;
         var found = this.head;
         if (this.head.val == value) {
-            var prev = this.head;
             while (current.next) {
                 if (current.next.val < value) {
                     let lesser = current.next;
                     current.next = lesser.next;
-                    lesser.next = prev;
-                    prev = lesser;
+                    lesser.next = this.head;
+                    this.head = lesser;
                 }
                 else { current = current.next; }
             }
