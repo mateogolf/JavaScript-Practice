@@ -20,6 +20,23 @@ function SLL(head=null) {
         current.next = new Node(value);
         return this;
     }
+    this.printAll = function () {
+        console.log("Linked List");
+        if (!this.head) {
+            console.log("Empty List")
+            return this
+        }//empty list ends
+
+        var current = this.head;
+        var count = 1;
+        console.log(count, ": ", current.val);
+        while (current.next) {
+            current = current.next;
+            count++;
+            console.log(count, ": ", current.val);
+        }
+        return this;
+    }
     this.addFront = function (value) {
         var newNode = new Node(value);
         newNode.next = this.head;
@@ -199,23 +216,6 @@ function SLL(head=null) {
         }
         current.next = new Node(value);
     }
-    this.printAll = function () {
-        console.log("Linked List");
-        if (!this.head) {
-            console.log("Empty List")
-            return this
-        }//empty list ends
-        
-        var current = this.head;
-        var count = 1;
-        console.log(count, ": ", current.val);
-        while (current.next) {
-            current = current.next;
-            count++;
-            console.log(count, ": ", current.val);
-        }
-        return this;
-    }
     this.append = function (value, after) {//add val after "after" variable
         if (!this.head) {
             console.log("Empty List")
@@ -331,12 +331,6 @@ function SLL(head=null) {
             return this;
         }
     }
-}
-function SLL2(head = null) {
-    //Inherit of SLL class
-    SLL.call(this, head);
-    
-    //methods
     this.partition = function (value) {
         if (!this.head || !this.head.next) {
             console.log("Empty List or too short")
@@ -383,7 +377,7 @@ function SLL2(head = null) {
                     greater.next = found.next;
                     found.next = greater;
                 }
-                else {current = current.next;}
+                else { current = current.next; }
             }//nodes >er moved after value
             if (!foundEnd) {
                 while (current.next) {
@@ -393,17 +387,58 @@ function SLL2(head = null) {
                         lesser.next = prev.next;
                         prev.next = lesser;
                     }
-                    else{current = current.next;}
+                    else { current = current.next; }
                 }
             }
         }//if found is not the first node
 
         return this;
     }//partition method
-
+}
+function SLL2(head = null) {
+    //Inherit of SLL class
+    SLL.call(this, head);
+    
+    //methods
+    this.partition2 = function (value) {
+        if (!this.head || !this.head.next) {
+            console.log("Empty List or too short")
+            return this
+        }//empty or 1 node list: do nothing
+        var current = this.head;
+        var found;
+        if (this.head.val != value) {
+            while (current.next) {
+                if (current.next.val == value) {
+                    found = true;
+                    let valNode = current.next;
+                    current.next = valNode.next;
+                    valNode.next = this.head;
+                    this.head = valNode;
+                    break;
+                }
+                else {current = current.next;}
+            }
+            if(!found){
+                console.log("Value not in the list");
+                return this;
+            }
+            current = this.head;
+        }
+        while (current.next) {
+            if (current.next.val < value) {
+                let lesser = current.next;
+                current.next = lesser.next;
+                lesser.next = this.head;
+                this.head = lesser;
+            }
+            else { current = current.next; }
+        }
+        return this;
+    }//partition method
 }
 
 var sl1 = new SLL2();
 sl1.insert(-1).insert(2).insert(-3).insert(6).insert(-2).insert(10).insert(5);
-sl1.partition(5);
+sl1.partition2(5);
 sl1.printAll();
