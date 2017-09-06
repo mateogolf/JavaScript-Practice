@@ -90,9 +90,9 @@ function compare2Queues(q1, q2) {
         if (current1.val != current2.val) {
             console.log("Queues' vals not equal and/or in order");
             return [q1, q2];
-            current1 = current1.next;
-            current2 = current2.next;
         }
+        current1 = current1.next;
+        current2 = current2.next;
     }
     console.log("Queues ARE equal!");
     return [q1, q2];
@@ -104,29 +104,6 @@ console.log(q.contains(0));//false
 console.log(q.contains(6));//true
 console.log(q.isEmpty());//false
 console.log(q.size());//4
-//Aug6 compare2Queues
-function compare2Queues(q1,q2){
-    if(!q1.head || !q2.head){ //(q1.isEmpty() || q2.isEmpty()){
-        console.log("1 or both queues are empty");
-        return [q1,q2];
-    }
-    if(q1.size() != q2.size()){
-        console.log("Queues not equal length");
-        return [q1, q2];
-    }
-    var current1 = q1.head;
-    var current2 = q2.head;
-    while(current1 && current2){
-        if(current1.val != current2.val){
-            console.log("Queues' vals not equal and/or in order");
-            return [q1, q2];
-        }
-        current1 = current1.next;
-        current2 = current2.next;
-    }
-    console.log("Queues ARE equal!");
-    return [q1, q2];
-}
 var q2 = new SLQueue();
 q2.enqueue(1).enqueue(5).enqueue(6).enqueue(20).printVals();
 var queues = compare2Queues(q,q2);
