@@ -29,3 +29,7 @@ function SLQueue(){
         return temp;        
     }
 }
+var q = new SLQueue();
+q.enqueue(1).enqueue(5).enqueue(6).enqueue(20).printVals();
+console.log(q.dequeue());
+q.printVals();
