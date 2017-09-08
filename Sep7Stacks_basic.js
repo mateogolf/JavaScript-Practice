@@ -38,6 +38,7 @@ function Node(value) {
 }
 function SLStack(){
     var top = null; //push and pop to the top variable
+    var counter = 0;
     //printAll
     this.print = function () {
         if (!top) {
@@ -58,11 +59,13 @@ function SLStack(){
     this.push = function (val) {
         if(!top){
             top = new Node(val);
+            counter++;
             return this;
         }
         var newNode = new Node(val);
         newNode.next = top;
         top = newNode;
+        counter++;
         return this;
     }
     //pop
@@ -72,6 +75,7 @@ function SLStack(){
         }
         var temp = top.val;
         top = top.next;
+        counter--;
         return temp;
     }
     //top
@@ -98,13 +102,7 @@ function SLStack(){
     }
     //size
     this.size = function () {
-        var count = 0;
-        var current = top;
-        while (current) {
-            count++;
-            current = current.next;
-        }
-        return count;
+        return counter;
     }
 }
 var stack = new SLStack();
