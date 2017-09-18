@@ -476,20 +476,60 @@ function SLL2(head = null) {
     SLL.call(this, head);
     
     //methods
-    this.printAll = function () {
-        console.log("Linked List");
-        if (!this.head) {
-            console.log("Empty List")
-            return this
-        }//empty list ends
-
+    this.reverse = function () {//method to reverse the list in place
+        if (!this.head || !this.head.next) { return this; }
         var current = this.head;
-        var count = 1;
-        // console.log(count, ": ", current.val);
-        while (current) {
-            console.log(count, ": ", current.val);
+        var prev = this.head;
+        while (current.next) {
+            prev = current;
             current = current.next;
-            count++;
+        }
+        var lastNode = current;//saves first last node
+        current = this.head;//current back to first in list
+        lastNode.next = this.head; //keeps lastNode in the list
+        this.head = lastNode; //saves this as head;
+        prev.next = null;
+        prev = this.head;
+        while (current.next) {
+            prev = current;
+            current = current.next;//travel thru list
+            if (!current.next) {//when on last node
+                //add last node before lastNode;
+                prev.next = null;//removes last node from list
+                current.next = lastNode.next;//maintian link
+                // console.log(current.next);
+                lastNode.next = current;//place before lastNode
+                lastNode = current;
+                prev = lastNode;
+                current = current.next;
+            }
+        }
+        return this;
+    }
+    this.reverse2 = function () {//reverse list without prev
+        if (!this.head || !this.head.next) { return this; }
+        var current = this.head;
+        while (current.next.next) {
+            current = current.next;
+        }
+        var lastNode = current.next;//saves first last node
+        current.next = null;
+        current = this.head;//current back to first in list
+        lastNode.next = this.head; //keeps lastNode in the list
+        this.head = lastNode; //saves this as head
+        while (current.next) {
+            if (current.next.next) {
+                current = current.next;//travel thru list
+            }
+            else {//when on last node
+                //add last node before lastNode;
+                var temp = current.next;
+                current.next = null;
+                temp.next = lastNode.next;//maintian link
+                lastNode.next = temp;//place before lastNode
+                lastNode = temp;
+                current = temp.next;
+            }
         }
         return this;
     }
@@ -498,7 +538,7 @@ function SLL2(head = null) {
 var sl1 = new SLL2();
 // var node1 = new Node(10);
 sl1.insert("A").insert("B").insert("C").insert("D");//.insert(10).insert(-2).insert(5).printAll();
-// sl1.reverse2().printAll().reverse2().printAll();
+sl1.reverse2().printAll().reverse2().printAll();
 
 function ReverseList(sList){
     if(!sList.head){
@@ -517,5 +557,5 @@ function ReverseList(sList){
         //put nodes into an array, then loop through the array from end to start
         //loop through SLL, count list
 }
-var reversed = ReverseList(sl1);
-reversed.printAll();
+// var reversed = ReverseList(sl1);
+// reversed.printAll();
