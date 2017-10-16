@@ -13,7 +13,7 @@ function genAllCoinChange(cents, input = { pennies: 0, nickels: 0, dimes: 0, qua
             result.push(input);
         }
         else{
-            console.log("The following object was already present",input);
+            // console.log("The following object was already present",input);
             console.log(input);
         }
     }
