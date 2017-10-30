@@ -94,7 +94,6 @@ function BSTree(root = null) {
         // console.log(`LEFT is larger:${count}`);
         return lHeight;
     }
-
 }
 var bst = new BSTree();
 bst.add(17).add(10).add(25).add(15).add(5).add(20).add(22).add(24).add(23)
