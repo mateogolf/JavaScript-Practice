@@ -563,7 +563,7 @@ function SLL2(head = null) {
     SLL.call(this, head);
     
     //methods
-    this.bubbleSort = function(){
+    this.bubbleSortAsc = function(){
         if (!this.head || !this.head.next) { return this; }
         let sorted=false;
         let prev=this.head;
@@ -606,4 +606,4 @@ function SLL2(head = null) {
 
 var sl1 = new SLL2();
 sl1.insert(3).insert(1).insert(4).insert(-4).insert(10).insert(5).printAll();
-sl1.bubbleSort();
+sl1.bubbleSortAsc();
